@@ -10,7 +10,6 @@ const MainPage = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             const haveCheckoutList = checkoutItem(list)
-            console.log('checkout list::', haveCheckoutList)
             setList([...haveCheckoutList]) 
         }, [2000])
 
