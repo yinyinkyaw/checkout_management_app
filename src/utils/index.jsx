@@ -18,3 +18,13 @@ export function addToQueue(array, queueId, value) {
     const customers = array[queueId]["customers"];
     customers.push(value);
 }
+
+export function checkoutItem(array) {
+    return array.map((info) => {
+        let customers = info.customers.map((item, index) => index === 0 && item > 0 ? item - 1 : item).filter((item) => item > 0)
+        return {
+            ...info,
+            "customers": customers
+        }
+    })
+}

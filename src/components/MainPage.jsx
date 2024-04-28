@@ -1,10 +1,21 @@
 import { AddToQueue } from '../components/AddToQueue'
 import { QueueList } from '../components/QueueList'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { QueueContext } from '../utils/context'
+import { checkoutItem } from '../utils'
 
 const MainPage = () => {
-    const { list } = useContext(QueueContext)
+    const { list, setList } = useContext(QueueContext);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const haveCheckoutList = checkoutItem(list)
+            console.log('checkout list::', haveCheckoutList)
+            setList([...haveCheckoutList]) 
+        }, [2000])
+
+        return () => clearInterval(intervalId)
+    }, [list])
 
     return (
         <div className="app_container">
